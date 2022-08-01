@@ -11,14 +11,25 @@ package com.javatunes.thread;
 public class RepeatingPrinterTest {
 
   public static void main(String[] args) {
-    Thread thd1 = new Thread(new RepeatingPrinter());
+    Thread thd1 = new Thread(new RepeatingPrinter()); //Calls repeatingPrinter class to print
     thd1.start();
     
-    // TODO: initialize the 'printer' reference variable with a block lambda
+    // DONE: initialize the 'printer' reference variable with a block lambda
     // hint: you can copy / paste the *contents* of RepeatingPrinter's run() method
     // note: change the sysout to show "block-lambda"
-    Runnable printer = null;
+    Runnable printer = () -> {
+      while (true) {  //this prints out "block-lamda" every 1000ms. No need to call a class.
+        System.out.println("block-lamda");
+        try {
+          Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+        }
+      }
+    };
     
-    // TODO: create another Thread, passing in the 'printer' reference as its Runnable - then start it
+    // DONE: create another Thread, passing in the 'printer' reference as its Runnable - then start it
+    Thread thd2 = new Thread(printer);
+    thd2.start();
   }
 }
