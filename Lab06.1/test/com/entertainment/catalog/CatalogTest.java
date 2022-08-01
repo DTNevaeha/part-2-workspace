@@ -96,18 +96,17 @@ public class CatalogTest {
     assertEquals(94, loudest.getVolume());
   }
 
+  @Test
   public void testSortByVolume() {
     List<Television> tvs = new ArrayList<>(Catalog.getInventory());
     //The list above is taking the contents from the collection so that it can be sorted.
-    tvs.sort((tv1, tv2) -> {
-      return Integer.compare(tv1.getVolume(), tv2.getVolume());
+    tvs.sort(Comparator.comparingInt(Television::getVolume));
+    System.out.println(tvs);
       /*
       integer compare makes it so if first is less than second make negative,
       if second is lower than first make a positive integer
       if equal then 0
        */
-      });
-    System.out.println(tvs);
   }
 
 }
